@@ -19,9 +19,9 @@ const registerDoctor = asyncHandler(async (req, res) => {
         throw new apiError(400, "All fields are required")
     }
 
-    if (!email.includes("@")) {
-        throw new apiError(401, "Invalid Email Address")
-    }
+    // if (!email.includes("@")) {
+    //     throw new apiError(401, "Invalid Email Address")
+    // }
 
     const existedAdmin = await Admin.findOne({ email })
 

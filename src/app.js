@@ -19,9 +19,7 @@ app.use(cookieParser())
 import { doctorRouter } from "./routes/doctor.routes.js"
 
 // routes declaration
-app.use("/" , (req, res)=>{
-    res.json("hello world")
-})
+
 app.use("/api/doctor" , doctorRouter)
 
 
