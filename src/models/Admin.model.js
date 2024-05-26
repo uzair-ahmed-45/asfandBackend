@@ -22,15 +22,15 @@ const adminSchema = new Schema({
 {timestamps : true})
 
 adminSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) return next()
+    if (!this.isModified("password")) return next();
     try {
-        const hashedpassword = await bcryptjs.hash(this.password, 10)
-        this.password == hashedpassword
-        next()
+        const hashedPassword = await bcryptjs.hash(this.password, 10);
+        this.password = hashedPassword; // Corrected assignment operator
+        next();
     } catch (error) {
-        console.log("error", error);
+        next(error); // Pass the error to the next middleware
     }
-})
+});
 
 adminSchema.methods.isPasswordCorrect = async function (password) {
     return await bcryptjs.compare(password, this.password)
