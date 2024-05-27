@@ -73,8 +73,8 @@ const login = asyncHandler(async (req, res) => {
 
     const { name, password } = req.body
 
-    if (!name) {
-        throw new apiError(400, "name is required")
+    if ([name , password].some((fields)=>fields?.trim() === "")) {
+        throw new apiError(400, "All fields are required")
     }
 
     const adminFound = await Admin.findOne({ name })
