@@ -1,13 +1,18 @@
 import mongoose, { Schema, set } from "mongoose";
 
+
 export const caseSchema = new Schema({
     chiefComplaint: {
         patientid: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Patient"
         },
-        patientname: {
-            type: String,
+        patient: {
+            type: Object,
+            required: true
+        },
+        caseNo: {
+            type: Number,
             required: true
         },
         patientfoundid: {
@@ -51,6 +56,10 @@ export const caseSchema = new Schema({
         complainId: {
             type: Schema.Types.ObjectId,
             ref: "Case"
+        },
+        caseNo: {
+            type: Number,
+            required: true
         },
         thermal: {
             type: String,
@@ -114,6 +123,10 @@ export const caseSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Case"
         },
+        caseNo: {
+            type: Number,
+            required: true
+        },
         familyRelation: {
             type: String,
             set: a => a === "" ? undefined : a
@@ -145,6 +158,10 @@ export const caseSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Case"
         },
+        caseNo: {
+            type: Number,
+            required: true
+        },
         nature: {
             type: String,
             Option: ["Mild", "Angry", "weepingPosition", "Obstinate", "Manipulate", "Fastedious", "Fear", "other"],
@@ -162,6 +179,10 @@ export const caseSchema = new Schema({
         complainId: {
             type: Schema.Types.ObjectId,
             ref: "Case"
+        },
+        caseNo: {
+            type: Number,
+            required: true
         },
         patientHistory: {
             type: String,
@@ -183,6 +204,10 @@ export const caseSchema = new Schema({
         complainId: {
             type: Schema.Types.ObjectId,
             ref: "Case"
+        },
+        caseNo: {
+            type: Number,
+            required: true
         },
         menstrual: {
             type: String,
@@ -212,6 +237,10 @@ export const caseSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Case"
         },
+        caseNo: {
+            type: Number,
+            required: true
+        },
         Nature: {
             type: String,
             Option: ["talkative with guests", "less talkative with guests", "mild", "angry"],
@@ -224,6 +253,10 @@ export const caseSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Case"
         },
+        caseNo: {
+            type: Number,
+            required: true
+        },
         Behavior: {
             type: String,
             options: ["Rudeness", "Lier Person", "Anger Level", "Other"],
@@ -232,7 +265,54 @@ export const caseSchema = new Schema({
         },
 
     },
+    labTests: {
+        complainId: {
+            type: Schema.Types.ObjectId,
+            ref: "Case"
+        },
+        caseNo: {
+            type: Number,
+            required: true
+        },
+        tests: {
+            type: String,
+            set: a => a === "" ? undefined : a
 
+        },
+
+    },
+    diagnosed: {
+        complainId: {
+            type: Schema.Types.ObjectId,
+            ref: "Case"
+        },
+        caseNo: {
+            type: Number,
+            required: true
+        },
+        diagnosed: {
+            type: String,
+            set: a => a === "" ? undefined : a
+
+        },
+
+    },
+    remedies: {
+        complainId: {
+            type: Schema.Types.ObjectId,
+            ref: "Case"
+        },
+        caseNo: {
+            type: Number,
+            required: true
+        },
+        remedies: {
+            type: String,
+            set: a => a === "" ? undefined : a
+
+        },
+
+    },
 }, {
     timestamps: true
 })
