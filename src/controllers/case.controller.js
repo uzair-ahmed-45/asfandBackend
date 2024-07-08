@@ -11,7 +11,6 @@ import mongoose from "mongoose";
 const chiefComplaint = asyncHandler(async (req, res) => {
     const {
         patientid,
-        caseNo,
         StartDate,
         Location,
         Sensation,
@@ -25,11 +24,6 @@ const chiefComplaint = asyncHandler(async (req, res) => {
     if (!patientid) {
         throw new apiError(400, "Patient ID is required");
     }
-    if (!caseNo) {
-        throw new apiError(402, "Case no is required")
-
-    }
-
     if (!mongoose.Types.ObjectId.isValid(patientid)) {
         throw new apiError(400, "Invalid Patient ID format");
     }
@@ -50,7 +44,6 @@ const chiefComplaint = asyncHandler(async (req, res) => {
         chiefComplaint: {
             patient,
             patientfoundid,
-            caseNo,
             StartDate,
             Location,
             Sensation,
@@ -100,7 +93,6 @@ const countTotalCases = asyncHandler(async (req, res) => {
 const generals = asyncHandler(async (req, res) => {
     const {
         complainId,
-        caseNo,
         thermal,
         hungerTolerance,
         eatingSpeed,
@@ -120,10 +112,7 @@ const generals = asyncHandler(async (req, res) => {
     if (!complainId) {
         throw new apiError(400, "Complain ID is required");
     }
-    if (!caseNo) {
-        throw new apiError(402, "Case no is required")
 
-    }
     const complain = await Case.findById(complainId);
 
     if (!complain) {
@@ -133,7 +122,6 @@ const generals = asyncHandler(async (req, res) => {
     complain.generals = {
         thermal,
         hungerTolerance,
-        caseNo,
         eatingSpeed,
         appetite,
         perspiration,
@@ -157,7 +145,6 @@ const mind = asyncHandler(async (req, res) => {
     const {
         complainId,
         familyRelation,
-        caseNo,
         friendsRelation,
         gathering,
         memory,
@@ -168,17 +155,13 @@ const mind = asyncHandler(async (req, res) => {
     if (!complainId) {
         throw new apiError(401, "complain ID is required")
     }
-    if (!caseNo) {
-        throw new apiError(402, "Case no is required")
 
-    }
     const complain = await Case.findById(complainId)
     if (!complain) {
         throw new apiError(404, "complain not found")
     }
 
     complain.mind = {
-        caseNo,
         familyRelation,
         friendsRelation,
         gathering,
@@ -195,7 +178,6 @@ const mind = asyncHandler(async (req, res) => {
 const nature = asyncHandler(async (req, res) => {
     const {
         complainId,
-        caseNo,
         nature,
         anxiety
     } = req.body
@@ -203,17 +185,13 @@ const nature = asyncHandler(async (req, res) => {
     if (!complainId) {
         throw new apiError(401, "Complain Id is required")
     }
-    if (!caseNo) {
-        throw new apiError(402, "Case no is required")
 
-    }
     const complain = await Case.findById(complainId)
     if (!complain) {
         throw new apiError(404, "Complain not found")
     }
 
     complain.nature = {
-        caseNo,
         nature,
         anxiety
     }
@@ -225,7 +203,6 @@ const nature = asyncHandler(async (req, res) => {
 const pastHistory = asyncHandler(async (req, res) => {
     const {
         complainId,
-        caseNo,
         patientHistory,
         patientFamilyHistory,
         patientDrugHistory
@@ -234,17 +211,13 @@ const pastHistory = asyncHandler(async (req, res) => {
     if (!complainId) {
         throw new apiError(401, "Complain Id is required")
     }
-    if (!caseNo) {
-        throw new apiError(402, "Case no is required")
 
-    }
     const complain = await Case.findById(complainId)
     if (!complain) {
         throw new apiError(404, "Complain not found")
     }
 
     complain.pastHistory = {
-        caseNo,
         patientHistory,
         patientFamilyHistory,
         patientDrugHistory
@@ -257,7 +230,6 @@ const pastHistory = asyncHandler(async (req, res) => {
 const gyaneHistory = asyncHandler(async (req, res) => {
     const {
         complainId,
-        caseNo,
         menstrual,
         Pain,
         bleeding,
@@ -268,17 +240,13 @@ const gyaneHistory = asyncHandler(async (req, res) => {
     if (!complainId) {
         throw new apiError(401, "Complain Id is required")
     }
-    if (!caseNo) {
-        throw new apiError(402, "Case no is required")
 
-    }
     const complain = await Case.findById(complainId)
     if (!complain) {
         throw new apiError(404, "Complain not found")
     }
 
     complain.gyaneHistory = {
-        caseNo,
         menstrual,
         Pain,
         bleeding,
@@ -293,24 +261,19 @@ const gyaneHistory = asyncHandler(async (req, res) => {
 const childhoodHistory = asyncHandler(async (req, res) => {
     const {
         complainId,
-        caseNo,
         Nature
     } = req.body
 
     if (!complainId) {
         throw new apiError(401, "Complain Id is required")
     }
-    if (!caseNo) {
-        throw new apiError(402, "Case no is required")
 
-    }
     const complain = await Case.findById(complainId)
     if (!complain) {
         throw new apiError(404, "Complain not found")
     }
 
     complain.childhoodHistory = {
-        caseNo,
         Nature
     }
     await complain.save()
@@ -321,24 +284,19 @@ const childhoodHistory = asyncHandler(async (req, res) => {
 const behavoir = asyncHandler(async (req, res) => {
     const {
         complainId,
-        caseNo,
         Behavior
     } = req.body
 
     if (!complainId) {
         throw new apiError(401, "Complain Id is required")
     }
-    if (!caseNo) {
-        throw new apiError(402, "Case no is required")
 
-    }
     const complain = await Case.findById(complainId)
     if (!complain) {
         throw new apiError(404, "Complain not found")
     }
 
     complain.behavoir = {
-        caseNo,
         Behavior
     }
     await complain.save()
@@ -349,24 +307,19 @@ const behavoir = asyncHandler(async (req, res) => {
 const labTests = asyncHandler(async (req, res) => {
     const {
         complainId,
-        caseNo,
         tests
     } = req.body
 
     if (!complainId) {
         throw new apiError(400, "Complain ID is required")
     }
-    if (!caseNo) {
-        throw new apiError(402, "Case no is required")
 
-    }
     const complain = await Case.findById(complainId)
     if (!complain) {
         throw new apiError(404, "Complain not found")
     }
 
     complain.labTests = {
-        caseNo,
         tests
     }
     await complain.save()
@@ -376,7 +329,6 @@ const labTests = asyncHandler(async (req, res) => {
 const diagnosis = asyncHandler(async (req, res) => {
     const {
         complainId,
-        caseNo,
         diagnosed
     } = req.body
 
@@ -390,7 +342,6 @@ const diagnosis = asyncHandler(async (req, res) => {
     }
 
     complain.diagnosed = {
-        caseNo,
         diagnosed
     }
     await complain.save()
@@ -401,7 +352,6 @@ const diagnosis = asyncHandler(async (req, res) => {
 const remedies = asyncHandler(async (req, res) => {
     const {
         complainId,
-        caseNo,
         remedies
     } = req.body
 
@@ -415,13 +365,52 @@ const remedies = asyncHandler(async (req, res) => {
     }
 
     complain.remedies = {
-        caseNo,
         remedies
     }
     await complain.save()
 
     return res.status(200).json(new Apiresponse(200, { complain }, "Remedies are added Successfully"))
 })
+const caseNo = asyncHandler(async (req, res) => {
+    const { complainId, caseNo } = req.body;
+
+    if (!complainId) {
+        throw new apiError(400, "Complain ID is required");
+    }
+
+    const complain = await Case.findById(complainId);
+    if (!complain) {
+        throw new apiError(404, "Complain not found");
+    }
+
+    complain.caseNo = {
+        caseNumber: caseNo
+    };
+    await complain.save();
+
+    return res.status(200).json(new Apiresponse(200, { complain }, "Case number added successfully"));
+})
+
+const getCaseNo = asyncHandler(async (req, res) => {
+    try {
+        const lastcase = await Case.findOne({})
+            .sort({ 'caseNo.caseNumber': -1 })
+            .limit(1);
+
+        let newCaseNo = 1;
+
+        if (lastcase && lastcase.caseNo && lastcase.caseNo.caseNumber) {
+            newCaseNo = lastcase.caseNo.caseNumber + 1;
+        }
+
+        return res.status(200).json(new Apiresponse(200, { caseNo: newCaseNo }, "Successful"));
+    } catch (error) {
+        console.log("Error in getCaseNo:", error);
+        return res.status(500).json(new Apiresponse(500, error, "An error occurred"));
+    }
+});
+
+
 
 export { chiefComplaint };
 export { generals }
@@ -436,3 +425,6 @@ export { countTotalCases }
 export { labTests }
 export { diagnosis }
 export { remedies }
+export { getCaseNo }
+export { caseNo }
+

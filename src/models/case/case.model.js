@@ -2,6 +2,7 @@ import mongoose, { Schema, set } from "mongoose";
 
 
 export const caseSchema = new Schema({
+
     chiefComplaint: {
         patientid: {
             type: mongoose.Schema.Types.ObjectId,
@@ -9,15 +10,10 @@ export const caseSchema = new Schema({
         },
         patient: {
             type: Object,
-            required: true
         },
-        caseNo: {
-            type: Number,
-            required: true
-        },
+
         patientfoundid: {
             type: String,
-            required: true
         },
         StartDate: {
             type: String,
@@ -57,10 +53,7 @@ export const caseSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Case"
         },
-        caseNo: {
-            type: Number,
-            required: true
-        },
+
         thermal: {
             type: String,
             set: a => a === '' ? undefined : a
@@ -123,10 +116,7 @@ export const caseSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Case"
         },
-        caseNo: {
-            type: Number,
-            required: true
-        },
+
         familyRelation: {
             type: String,
             set: a => a === "" ? undefined : a
@@ -160,7 +150,7 @@ export const caseSchema = new Schema({
         },
         caseNo: {
             type: Number,
-            required: true
+
         },
         nature: {
             type: String,
@@ -182,7 +172,7 @@ export const caseSchema = new Schema({
         },
         caseNo: {
             type: Number,
-            required: true
+
         },
         patientHistory: {
             type: String,
@@ -207,7 +197,7 @@ export const caseSchema = new Schema({
         },
         caseNo: {
             type: Number,
-            required: true
+
         },
         menstrual: {
             type: String,
@@ -239,7 +229,7 @@ export const caseSchema = new Schema({
         },
         caseNo: {
             type: Number,
-            required: true
+
         },
         Nature: {
             type: String,
@@ -255,7 +245,7 @@ export const caseSchema = new Schema({
         },
         caseNo: {
             type: Number,
-            required: true
+
         },
         Behavior: {
             type: String,
@@ -272,7 +262,7 @@ export const caseSchema = new Schema({
         },
         caseNo: {
             type: Number,
-            required: true
+
         },
         tests: {
             type: String,
@@ -288,7 +278,7 @@ export const caseSchema = new Schema({
         },
         caseNo: {
             type: Number,
-            required: true
+
         },
         diagnosed: {
             type: String,
@@ -302,15 +292,21 @@ export const caseSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Case"
         },
-        caseNo: {
-            type: Number,
-            required: true
-        },
         remedies: {
             type: String,
             set: a => a === "" ? undefined : a
 
         },
+
+    },
+    caseNo: {
+        complainId: {
+            type: Schema.Types.ObjectId,
+            ref: "Case"
+        },
+        caseNumber: {
+            type: Number
+        }
 
     },
 }, {

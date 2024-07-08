@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { behavoir, chiefComplaint, childhoodHistory, countTotalCases, diagnosis, generals, gyaneHistory, labTests, mind, nature, pastHistory, remedies, totalCases } from "../controllers/case.controller.js";
+import { behavoir, caseNo, chiefComplaint, childhoodHistory, countTotalCases, diagnosis, generals, getCaseNo, gyaneHistory, labTests, mind, nature, pastHistory, remedies, totalCases } from "../controllers/case.controller.js";
 
 const caseRouter = Router()
 
@@ -16,6 +16,8 @@ caseRouter.route('/countTotalCases').get(countTotalCases)
 caseRouter.route('/labTests').put(labTests)
 caseRouter.route('/diagnosed').put(diagnosis)
 caseRouter.route('/remedies').put(remedies)
+caseRouter.route('/getcaseNo').get(getCaseNo)
+caseRouter.route('/caseNo').put(caseNo)
 
 
 export { caseRouter }
