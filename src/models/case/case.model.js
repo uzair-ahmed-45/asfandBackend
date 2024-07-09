@@ -282,7 +282,7 @@ export const caseSchema = new Schema({
         },
         diagnosed: {
             type: String,
-            set: a => a === "" ? undefined : a
+            set: a => a === "" ? undefined : a,
 
         },
 

@@ -78,6 +78,29 @@ const totalCases = asyncHandler(async (req, res) => {
 
     return res.status(200).json(new Apiresponse(200, caseCount, "Successful"));
 });
+
+const patientCases = asyncHandler(async (req, res) => {
+    const { patientid } = req.body;
+
+    if (!patientid) {
+        throw new apiError(400, "Patient ID is required");
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(patientid)) {
+        throw new apiError(400, "Invalid Patient ID format");
+    }
+
+    const patient = await Patient.findById(patientid);
+
+    if (!patient) {
+        throw new apiError(404, "Patient not found");
+    }
+
+    const cases = await Case.find({ 'chiefComplaint.patientfoundid': patientid });
+    // const casesarray = [{ cases }]
+
+    return res.status(200).json(new Apiresponse(200, cases, "Successful"));
+});
 const countTotalCases = asyncHandler(async (req, res) => {
 
     try {
@@ -412,6 +435,7 @@ const getCaseNo = asyncHandler(async (req, res) => {
 
 
 
+
 export { chiefComplaint };
 export { generals }
 export { mind }
@@ -427,4 +451,5 @@ export { diagnosis }
 export { remedies }
 export { getCaseNo }
 export { caseNo }
+export { patientCases }
 

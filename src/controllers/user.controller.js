@@ -2,6 +2,7 @@ import asyncHandler from "../utils/asyncHandler.js"
 import apiError from '../utils/apiError.js'
 import apiResponse from '../utils/apiResponse.js'
 import { Admin } from "../models/Admin.model.js"
+import Apiresponse from "../utils/apiResponse.js"
 
 
 const registerDoctor = asyncHandler(async (req, res) => {
@@ -73,7 +74,7 @@ const login = asyncHandler(async (req, res) => {
 
     const { name, password } = req.body
 
-    if ([name , password].some((fields)=>fields?.trim() === "")) {
+    if ([name, password].some((fields) => fields?.trim() === "")) {
         throw new apiError(400, "All fields are required")
     }
 
@@ -112,5 +113,20 @@ const login = asyncHandler(async (req, res) => {
 
 })
 
+const passwordChange = asyncHandler(async (req, res) => {
+    const { doctorId, oldPassword, newPassword } = req.body
+
+    const user = await Admin.findById(doctorId)
+    const isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
+    if (!isPasswordCorrect) {
+        throw new apiError(400, "Invalid Old Password")
+    }
+    user.password = newPassword
+    await user.save({ validateBeforeSave: false })
+
+    return res.status(200).json(new Apiresponse(200, {}, "Password Changed Successfully"))
+})
+
 export { login }
-export { registerDoctor }   
+export { registerDoctor }
+export { passwordChange }
