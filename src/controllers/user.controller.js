@@ -14,7 +14,6 @@ const registerDoctor = asyncHandler(async (req, res) => {
     // remove password and refreshtoken
     // return res
     const { name, email, password } = req.body
-    console.log(name);
 
     if ([name, email, password].some((fields) => fields?.trim() === "")) {
         throw new apiError(400, "All fields are required")

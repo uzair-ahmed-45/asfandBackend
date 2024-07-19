@@ -29,7 +29,6 @@ const chiefComplaint = asyncHandler(async (req, res) => {
     }
 
     const patientfound = await Patient.findById(patientid);
-    console.log("Patient found:", patientfound);
 
     if (!patientfound) {
         throw new apiError(404, "Patient not found");
@@ -39,7 +38,7 @@ const chiefComplaint = asyncHandler(async (req, res) => {
     if (!patient) {
         throw new apiError(400, "unable to get patient name")
     }
-    console.log(patient);
+
     const createdchiefComplaint = await Case.create({
         chiefComplaint: {
             patient,
@@ -111,7 +110,6 @@ const countTotalCases = asyncHandler(async (req, res) => {
         console.log(error);
     }
 })
-
 
 const generals = asyncHandler(async (req, res) => {
     const {
