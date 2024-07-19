@@ -8,9 +8,11 @@ dotenv.config();
 const app = express()
 app.use(express.json({ limit: "20kb" }))
 app.use(cors({
-    origin: process.env.CORS_ORIGIN
-}))
-app.options('*' , cors())
+    origin: process.env.CORS_ORIGIN,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // if you want to handle cookies
+}));
+
 
 app.use(express.urlencoded({
     extended: true,
