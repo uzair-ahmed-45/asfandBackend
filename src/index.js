@@ -7,8 +7,6 @@ config({
 });
 
 
-
-
 dbConnection()
     .then(() => {
         app.listen(process.env.PORT || 8000, (req, res) => {
