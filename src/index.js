@@ -9,14 +9,10 @@ config({
 
 
 try {
-    await mongoose.connect(process.env.MONGODB_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
-    console.log('MongoDB connected successfully');
+    const connection = await mongoose.connect(`${process.env.MONGODB_URL}`)
+    console.log(`Database Connected !! Host ${connection.connection.host}/${db_name}`);
 } catch (error) {
-    console.error('Database connection error:', error);
-    process.exit(1);
+    console.log(`Database Connection error ${error}`)
 }
 
 app.listen(process.env.PORT || 8000, (req, res) => {
