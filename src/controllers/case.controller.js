@@ -11,6 +11,7 @@ import mongoose from "mongoose";
 const chiefComplaint = asyncHandler(async (req, res) => {
     const {
         patientid,
+        chiefComplain,
         StartDate,
         Location,
         Sensation,
@@ -43,6 +44,7 @@ const chiefComplaint = asyncHandler(async (req, res) => {
         chiefComplaint: {
             patient,
             patientfoundid,
+            chiefComplain,
             StartDate,
             Location,
             Sensation,

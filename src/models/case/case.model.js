@@ -15,6 +15,10 @@ export const caseSchema = new Schema({
         patientfoundid: {
             type: String,
         },
+        chiefComplain: {
+            type: String,
+            set: y => y === '' ? undefined : y
+        },
         StartDate: {
             type: String,
             set: a => a === '' ? undefined : a
