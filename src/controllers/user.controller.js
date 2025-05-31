@@ -63,14 +63,6 @@ const generateAccessandRefreshToken = async (userId) => {
 }
 
 const login = asyncHandler(async (req, res) => {
-    // get name and password from req.body
-    // name validation
-    // find user using name
-    // check password
-    // generate access and refresh token 
-    // send in cookie
-    // return res
-
     const { name, password } = req.body
 
     if ([name, password].some((fields) => fields?.trim() === "")) {
@@ -106,7 +98,6 @@ const login = asyncHandler(async (req, res) => {
                 adminFound: loggedInDoctor, accessToken, refreshToken
             }, "User LoggedIn Successfully")
         )
-
 
 
 
